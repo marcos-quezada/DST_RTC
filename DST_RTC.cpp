@@ -24,6 +24,7 @@ boolean DST_RTC::checkDST(DateTime RTCTime)
 
   //Get the day of the week. 0 = Sunday, 6 = Saturday
   int previousSunday = RTCTime.day() - RTCTime.dayOfTheWeek();
+  int nextSunday = RTCTime.day() + (7 - RTCTime.dayOfTheWeek());
 
   boolean dst = false; //Assume we're not in DST
   if (RTCTime.month() > 3 && RTCTime.month() < 11) dst = true; //DST is happening!
@@ -31,13 +32,15 @@ boolean DST_RTC::checkDST(DateTime RTCTime)
   //In March, we are DST if our previous Sunday was on or after the 8th.
   if (RTCTime.month() == 3)
   {
-    if (previousSunday >= 8) dst = true;
+    //if (previousSunday >= 8) dst = true;
+    if (nextSunday > 31) dst = true;
   }
   //In November we must be before the first Sunday to be dst.
   //That means the previous Sunday must be before the 1st.
-  if (RTCTime.month() == 11)
+  if (RTCTime.month() == 10)
   {
-    if (previousSunday <= 0) dst = true;
+    //if (previousSunday <= 0) dst = true;
+    if (nextSunday <= 31) dst = true;
   }
 
 return dst;
