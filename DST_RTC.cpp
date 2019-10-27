@@ -27,7 +27,7 @@ boolean DST_RTC::checkDST(DateTime RTCTime)
   int nextSunday = RTCTime.day() + (7 - RTCTime.dayOfTheWeek());
 
   boolean dst = false; //Assume we're not in DST
-  if (RTCTime.month() > 3 && RTCTime.month() < 11) dst = true; //DST is happening!
+  if (RTCTime.month() > 3 && RTCTime.month() < 10) dst = true; //DST is happening!
 
   //In March, we are DST if our previous Sunday was on or after the 8th.
   if (RTCTime.month() == 3)
